@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  crawl4ai:
+    image: unclecode/crawl4ai:latest
+    container_name: crawl4ai
+    ports:
+      - "11235:11235"
+    environment:
+      API_KEY: mysecretkey123
+      REDIS_URL: redis://default:1QAZ2wsx3EDC4rfva5TGB@firecrawl-redis:6379
+    restart: unless-stopped
+    networks:
+      - firecrawl-app_firecrawl-net  # 加入 firecrawl 的网络
+
+networks:
+  firecrawl-app_firecrawl-net:
+    external: true     # 表示使用已有的外部网络（由 firecrawl 定义）
